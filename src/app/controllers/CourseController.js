@@ -1,4 +1,4 @@
-const course = require('../models/course');
+const Course = require('../models/course');
 const { mongooseToObject } = require('../../util/mongoose');
 class CoursesController {
     // Method: [GET] 
@@ -7,7 +7,7 @@ class CoursesController {
     // để lấy tham số đường dẫn :slug
     // req.params.slug
     show(req, res, next) {
-        course.findOne({ slug : req.params.slug })
+        Course.findOne({ slug : req.params.slug })
             .then((course) => {
                 res.render('courses/show', {
                     course: mongooseToObject(course)
@@ -28,13 +28,13 @@ class CoursesController {
         dataCreateCourse.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
         // const course = new course({những thuộc tính ở đây mà muốn thêm vào document trong database});
         // những thuộc tính muốn thêm vào trong document database thì trong document và model phải chứa những trường thông tin đó
-        const course = new course(dataCreateCourse);
-        await course.save()
+        const newCourse = new Course(dataCreateCourse);
+        await newCourse.save()
             .then(() => {
                 res.redirect('/'); // chuyển hướng về trang chủ (/)
             })
             .catch((error) => {
-                next(error)
+                next(error);
             })
     }
 }
