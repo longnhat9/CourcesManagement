@@ -10,10 +10,11 @@ const Course = new Schema({
     videoId: { type: String, required: true, },
     slug: { type: String, slug: 'name', unique: true },
     // thuộc tính ràng buộc uique: true là để tránh slug của các course trùng nhau
-    // createAt: { type: Date, default: Date.now },
-    // updateAt: { type: Date, default: Date.now },
+    // createdAt: { type: Date, default: Date.now },
+    // updatedAt: { type: Date, default: Date.now },
 }, {
     timestamps: true,
+    versionKey: false,
 });
 
 module.exports = mongoose.model('Course', Course);
