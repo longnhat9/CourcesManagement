@@ -1,5 +1,8 @@
 <div class="mt-4">
     <h3>Khóa học của tôi</h3>
+    <div class="">
+        <a href="/me/trash/courses">Thùng rác ({{coursesDeleteCount}})</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -19,6 +22,13 @@
                 <td>
                     <a href="/courses/{{this._id}}/edit" class="btn btn-link" type="submit">Chỉnh sửa</a>
                     <a href="" data-bs-id="{{this._id}}" class="btn btn-link" type="submit" data-bs-toggle="modal" data-bs-target="#delete-course-modal">Xóa</a>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="5" class="text-center">
+                    Bạn chưa tạo khóa học. 
+                    <a href="/courses/create">Tạo khóa học</a>
                 </td>
             </tr>
             {{/each}}
@@ -54,7 +64,7 @@
     const deleteCourseModal = document.getElementById('delete-course-modal');
     const btnDeleteCourse = document.getElementById('btn-delete-course');
     const formDelteCourse = document.getElementById('delete-course-hiden-form');
-    {{!-- const formDelteCourse = document.forms['delete-course-hiden-form']; --}}
+    
     if (deleteCourseModal) {
         deleteCourseModal.addEventListener('show.bs.modal', (event) => {
             const button = event.relatedTarget;
